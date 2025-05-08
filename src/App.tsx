@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
+import Footer from './components/Footer';
 // import Footer from './components/Footer'
 // import MultiStepForm from './components/MultiStepForm';
 
@@ -19,7 +20,7 @@ const App: React.FC = () => {
             />
           </Routes>
         </main>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </Router>
   );
