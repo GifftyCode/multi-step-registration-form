@@ -1,54 +1,125 @@
-# React + TypeScript + Vite
+# Multi-Step Registration Form
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive multi-step registration form built with React, TypeScript, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📱 Fully responsive design
+- 🔄 Multi-step form with progress tracking
+- 🔍 Form validation using Formik and Yup
+- 📂 File upload functionality
+- 🎨 Modern UI with Tailwind CSS
+- ⚡ Built with Vite for fast development
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React
+- TypeScript
+- Tailwind CSS
+- Formik & Yup for form handling and validation
+- React Icons
+- Vite
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v16+)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone <your-repo-url>
+cd registration-form
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Install dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm install
+# or
+yarn install
 ```
+
+3. Start the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+4. Open your browser and navigate to:
+
+```
+http://localhost:3000
+```
+
+## Build for Production
+
+```bash
+npm run build
+# or
+yarn build
+```
+
+The build artifacts will be stored in the `dist/` directory.
+
+## Deployment
+
+This project is configured for easy deployment to Netlify:
+
+```bash
+npm run deploy
+# or
+yarn deploy
+```
+
+## Project Structure
+
+```
+registration-form/
+├── public/              # Static files
+│   └── logo.svg
+├── src/
+│   ├── assets/          # Images, fonts, etc.
+│   ├── components/      # Reusable components
+│   │   ├── FormLayout.tsx
+│   │   ├── ProgressBar.tsx
+│   │   ├── SocialIcons.tsx
+│   │   └── Button.tsx
+│   ├── pages/           # Form steps as separate components
+│   │   ├── PersonalInfo.tsx
+│   │   ├── Address.tsx
+│   │   ├── Verification.tsx
+│   │   └── TermsConditions.tsx
+│   ├── context/         # React context for state management
+│   │   └── FormContext.tsx
+│   ├── hooks/           # Custom React hooks
+│   │   └── useForm.tsx
+│   ├── App.tsx          # Main application component
+│   ├── main.tsx         # Entry point
+│   └── index.css        # Global styles with Tailwind
+├── tailwind.config.js   # Tailwind configuration
+├── postcss.config.js    # PostCSS configuration
+├── tsconfig.json        # TypeScript configuration
+├── vite.config.ts       # Vite configuration
+└── package.json         # Project dependencies and scripts
+```
+
+## Best Practices Used
+
+- Component-based architecture
+- Custom hooks for separation of concerns
+- Context API for state management
+- Form validation with schema validation
+- TypeScript for type safety
+- Responsive design with Tailwind CSS
+- Proper file structure for scalability
+
+## License
+
+MIT

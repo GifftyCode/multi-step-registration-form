@@ -1,17 +1,40 @@
-import React from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Form from './components/Form';
+import React from "react";
+import FormLayout from "./components/FormLayout";
+import PersonalInfo from "./pages/PersonalInfo";
+import Address from "./pages/Address";
+import Verification from "./pages/Verification";
+import TermsConditions from "./pages/TermsConditions";
+import { FormProvider } from "./context/FormContext";
+import { useForm } from "./hooks/useForm";
+
+const FormContent: React.FC = () => {
+  const { currentStep } = useForm();
+
+  const renderStep = () => {
+    switch (currentStep) {
+      case 1:
+        return <PersonalInfo />;
+      case 2:
+        return <Address />;
+      case 3:
+        return <Verification />;
+      case 4:
+        return <TermsConditions />;
+      default:
+        return <PersonalInfo />;
+    }
+  };
+
+  return <>{renderStep()}</>;
+};
 
 const App: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <main className="flex-1">
-        <Form />
-      </main>
-      <Footer />
-    </div>
+    <FormProvider>
+      <FormLayout>
+        <FormContent />
+      </FormLayout>
+    </FormProvider>
   );
 };
 
