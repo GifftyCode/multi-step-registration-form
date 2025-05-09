@@ -1,23 +1,24 @@
+// src/components/Step3.tsx
+
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
-import { z } from 'zod';
+import type { FormData, FormErrors } from '../types/FormTypes';
 
-export const verificationSchema = z.object({
-  nin: z.string().min(1, 'NIN is required'),
-  bvn: z.string().min(1, 'BVN is required'),
-  frontId: z
-    .any()
-    .refine((file) => file instanceof File, 'Front ID is required'),
-  backId: z.any().refine((file) => file instanceof File, 'Back ID is required'),
-});
+interface Step3Props {
+  formData: FormData;
+  setFormData: (data: FormData) => void;
+  errors: FormErrors;
+}
 
-// Verification form step
-const Verification: React.FC = () => {
-  const {
-    register,
-    formState: { errors },
-    setValue,
-  } = useFormContext();
+const Step3: React.FC<Step3Props> = ({ formData, setFormData, errors }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, files } = e.target;
+    setFormData({ ...formData, [name]: files ? files[0] : null });
+  };
 
   return (
     <div className="space-y-4">
@@ -27,27 +28,25 @@ const Verification: React.FC = () => {
       <div className="flex space-x-4">
         <div className="flex-1">
           <input
-            {...register('nin')}
+            type="text"
+            name="nin"
             placeholder="NIN"
+            value={formData.nin}
+            onChange={handleChange}
             className="w-full p-2 border rounded"
           />
-          {errors.nin && (
-            <p className="text-red-500 text-sm">
-              {errors.nin.message as string}
-            </p>
-          )}
+          {errors.nin && <p className="text-red-500 text-sm">{errors.nin}</p>}
         </div>
         <div className="flex-1">
           <input
-            {...register('bvn')}
+            type="text"
+            name="bvn"
             placeholder="BVN"
+            value={formData.bvn}
+            onChange={handleChange}
             className="w-full p-2 border rounded"
           />
-          {errors.bvn && (
-            <p className="text-red-500 text-sm">
-              {errors.bvn.message as string}
-            </p>
-          )}
+          {errors.bvn && <p className="text-red-500 text-sm">{errors.bvn}</p>}
         </div>
       </div>
       <div className="space-y-2">
@@ -55,18 +54,14 @@ const Verification: React.FC = () => {
           Upload Front of ID (JPG, PNG, PDF — Max size: 5MB)
           <input
             type="file"
+            name="frontId"
             accept=".jpg,.png,.pdf"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) setValue('frontId', file, { shouldValidate: true });
-            }}
+            onChange={handleFileChange}
             className="w-full p-2 border rounded"
           />
         </label>
         {errors.frontId && (
-          <p className="text-red-500 text-sm">
-            {errors.frontId.message as string}
-          </p>
+          <p className="text-red-500 text-sm">{errors.frontId}</p>
         )}
         <p className="text-red-500 text-sm">
           * Make sure the uploaded image is clear and all text is readable
@@ -77,18 +72,14 @@ const Verification: React.FC = () => {
           Upload Back of ID (JPG, PNG, PDF — Max size: 5MB)
           <input
             type="file"
+            name="backId"
             accept=".jpg,.png,.pdf"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) setValue('backId', file, { shouldValidate: true });
-            }}
+            onChange={handleFileChange}
             className="w-full p-2 border rounded"
           />
         </label>
         {errors.backId && (
-          <p className="text-red-500 text-sm">
-            {errors.backId.message as string}
-          </p>
+          <p className="text-red-500 text-sm">{errors.backId}</p>
         )}
         <p className="text-red-500 text-sm">
           * Make sure the uploaded image is clear and all text is readable
@@ -98,4 +89,4 @@ const Verification: React.FC = () => {
   );
 };
 
-export default Verification;
+export default Step3;

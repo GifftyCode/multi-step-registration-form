@@ -1,20 +1,19 @@
+// src/components/Step4.tsx
+
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
-import { z } from 'zod';
+import type { FormData, FormErrors } from '../types/FormTypes';
 
-// Schema for Step 4 validation using Zod
-export const termsSchema = z.object({
-  termsAccepted: z
-    .boolean()
-    .refine((val) => val === true, 'You must accept the terms and conditions'),
-});
+interface Step4Props {
+  formData: FormData;
+  setFormData: (data: FormData) => void;
+  errors: FormErrors;
+}
 
-// Terms & Conditions form step
-const TermsConditions: React.FC = () => {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext();
+const Step4: React.FC<Step4Props> = ({ formData, setFormData, errors }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setFormData({ ...formData, [name]: checked });
+  };
 
   return (
     <div className="space-y-4">
@@ -40,16 +39,19 @@ const TermsConditions: React.FC = () => {
         </li>
       </ol>
       <label className="flex items-center space-x-2">
-        <input {...register('termsAccepted')} type="checkbox" />
-        <span>Please accept term and conditions?</span>
+        <input
+          type="checkbox"
+          name="termsAccepted"
+          checked={formData.termsAccepted}
+          onChange={handleChange}
+        />
+        <span>Please accept terms and conditions?</span>
       </label>
       {errors.termsAccepted && (
-        <p className="text-red-500 text-sm">
-          {errors.termsAccepted.message as string}
-        </p>
+        <p className="text-red-500 text-sm">{errors.termsAccepted}</p>
       )}
     </div>
   );
 };
 
-export default TermsConditions;
+export default Step4;
