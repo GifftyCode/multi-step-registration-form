@@ -42,7 +42,7 @@ const Address: React.FC = () => {
               htmlFor="street1"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              street 1
+              Street 1
             </label>
             <Field
               type="text"
@@ -65,7 +65,7 @@ const Address: React.FC = () => {
               htmlFor="street2"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              street 2
+              Street 2
             </label>
             <Field
               type="text"
@@ -141,7 +141,7 @@ const Address: React.FC = () => {
                 }`}
               >
                 <option value="">Select a country</option>
-                <option value="US">United States</option>
+                <option value="NGN">Nigeria</option>
                 <option value="CA">Canada</option>
                 <option value="UK">United Kingdom</option>
                 <option value="AU">Australia</option>
