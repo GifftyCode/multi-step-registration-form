@@ -32,7 +32,7 @@ A modern, responsive multi-step registration form built with React, TypeScript, 
 1. Clone the repository:
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/GifftyCode/multi-step-registration-form.git
 cd registration-form
 ```
 
